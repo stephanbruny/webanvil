@@ -1,0 +1,19 @@
+{
+  "name": "web-anvil-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test --recursive --exit"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^3.21.0",
+    "handlebars": "^4.7.7",
+    "ioredis": "^4.27.9"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.1"
+  }
+}
