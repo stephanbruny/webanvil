@@ -57,4 +57,28 @@ describe('Partials module', () => {
             await partials.registerAll();
         }, 'Expected to resolve registering all partials');
     });
+
+    it('should render registered partials', async () => {
+        const Partials = require('../../lib/partials');
+        const partials = Partials(Store());
+
+        const fooPartial = `<foo>{{foo}}</foo>`;
+        const barPartial = `<bar>{{bar}}</bar>`;
+        const bazPartial = `<baz>{{baz}}</baz>`;
+
+        await partials.set('foo', fooPartial);
+        await partials.set('bar', barPartial);
+        await partials.set('baz', bazPartial);
+
+        await partials.registerAll();
+
+        const testTemplate = `<test>{{> foo}}{{> bar}}{{> baz}}</test>`;
+        const template = Handlebars.compile(testTemplate);
+        const result = template({
+            foo: 'foobar',
+            bar: 'barfoo',
+            baz: 'Han shot first'
+        });
+        assert.strictEqual(result, '<test><foo>foobar</foo><bar>barfoo</bar><baz>Han shot first</baz></test>');
+    });
 });
