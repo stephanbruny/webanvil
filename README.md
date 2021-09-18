@@ -5,11 +5,11 @@ A webservice for static page generation based on handlebars templates.
 ## API
 
 - `/api/html/<id>`
-    - GET: Renders the template specified by `id`
+    - GET: Returns the template specified by `id`
     - POST: Create/Overwrite template specified by `id`
 
 - `/api/partial/<id>?<params>`
-    - GET: Renders the partial specified by `id` with applied parameters
+    - GET: Returns the partial specified by `id` with applied parameters
     - POST: Create/Overwrite partial specified by `id`
 
 - `/api/data/<namespace>/<id>`
@@ -19,6 +19,9 @@ A webservice for static page generation based on handlebars templates.
 - `/api/acc/<namespace>/<id>`
     - GET: Returns the address of the webservice of the accumulator
     - POST: Creates/Overwrites accumulator
+
+- `/render/<html | partial>/:id(?<param>=<value>)`:
+    - GET: Renders the template or partial specified by `id` (optional parameters can be applied)
 
 ## Accumulator
 
