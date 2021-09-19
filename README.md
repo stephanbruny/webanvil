@@ -20,8 +20,9 @@ A webservice for static page generation based on handlebars templates.
     - GET: Returns the address of the webservice of the accumulator
     - POST: Creates/Overwrites accumulator
 
-- `/render/<html | partial>/:id(?<param>=<value>)`:
+- `/html/<html | partial>/:id(?<param>=<value>)`:
     - GET: Renders the template or partial specified by `id` (optional parameters can be applied)
+    - POST: Render the template or partial specified by `id` with the data from the requests body (as JSON)
 
 ## Accumulator
 
