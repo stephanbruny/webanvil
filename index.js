@@ -1,31 +1,17 @@
-const fastify = require("fastify");
-const Store = require('./lib/store');
-const Redis = require('./lib/store/redis');
-const Handlebars = require('handlebars');
+const Server = require('./lib/server');
+const RedisStore = require('./lib/store/redis');
 
-const initializeRoutes = async (server, store) => {
-    const render = renderTemplate(store);
-    const partials = Partials(store);
-    const partialItems = await partials.registerAll();
+const runtimeEnvironment = process.env.SERVICE_ENV || 'default';
 
-    server.get("/:id", async (request, reply) => {
-        const result = await render(request.params.id, {
-            title: 'Webanvil 1.0',
-            content: 'No content'
-        });
-        return reply.type('text/html').send(result);
-    });
-}
+const config = require(`./config.${runtimeEnvironment}.json`);
+const pkg = require('./package.json');
 
-const start = async () => {
-    const server = fastify({ logger: true });
-    const store = Store(Redis());
-    await initializeRoutes(server, store);
-    try {
-        await server.listen(8080);
-    } catch (err) {
-        server.log.error(err);
-        process.exit(1);
-    }
-};
-start();
+const storeImplementation = config.store && config.store.redis ? RedisStore(config.store.redis) : null;
+
+Server({
+    port: config.port,
+    store: storeImplementation
+}).then(server => {
+    console.log(`WebAnvil ${pkg.version} (${runtimeEnvironment} environment)`);
+    console.log(`Service started (port: ${config.port})`)
+}).catch(err => console.error(err));

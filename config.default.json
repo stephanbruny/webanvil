@@ -1,0 +1,9 @@
+{
+    "port": 8300,
+    "store": {
+        "redis": {
+            "host": "localhost",
+            "port": 6379
+        }
+    }
+}

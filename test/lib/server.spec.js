@@ -41,14 +41,14 @@ describe('Server module', () => {
             method: 'POST',
             url: `${hostUrl}/api/partial/test`,
             headers: { "Content-Type": "text/plain" },
-            data: '<test>{{test.text}}</test>'
+            data: '<test>{{text}}</test>'
         });
 
         await axios({
             method: 'POST',
             url: `${hostUrl}/api/html/test`,
             headers: { "Content-Type": "text/plain" },
-            data: '<page text="{{text}}">{{> test}}</page>'
+            data: '<page text="{{text}}">{{> test test}}</page>'
         });
         const renderedWithPartial = await axios.post(`${hostUrl}/html/test`, {
             text: 'This but a test',

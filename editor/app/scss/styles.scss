@@ -1,0 +1,113 @@
+$background-color: #303030;
+$text-color: #f4f4f4;
+$primary-color: #2D4373;
+$font: ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace;
+
+@mixin flexcol {
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background: $background-color;
+    color: $text-color;
+    font-family: $font;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: $primary-color url(../assets/waves.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: $text-color;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    font-size: 24px;
+    text-shadow: 0px 1px 1px #000;
+}
+
+textarea, input {
+    color: #303030;
+    border-radius: 8px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+
+    div {
+        flex: 1 1;
+        @include flexcol();
+    }
+
+    aside {
+        flex: 0 1 auto;
+        @include flexcol();
+        padding: 12px;
+    }
+
+    input {
+        outline: none;
+        border: none;
+        background: #fff;
+        color: $background-color;
+        font: $font;
+        padding: 9px 12px;
+    }
+
+    form {
+        padding: 12px;
+        @include flexcol();
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        a {
+            color: #ffffff;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+button {
+    outline: none;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// classes
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+// 3rd party
+
+.w-tc-editor {
+    color: #303030;
+    border-radius: 8px;
+}

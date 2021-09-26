@@ -1,0 +1,28 @@
+{
+  "name": "webanvil-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "parcel ./app/index.html && npm start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.15.4",
+    "@uiw/react-textarea-code-editor": "^1.4.13",
+    "fastify": "^3.21.6",
+    "fastify-static": "^4.2.3",
+    "prismjs": "^1.25.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-simple-code-editor": "^0.11.0",
+    "react-syntax-highlighter": "^15.4.4",
+    "refractor": "^3.4.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.42.1"
+  }
+}
