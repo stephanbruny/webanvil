@@ -2,6 +2,7 @@ import React from "react";
 
 import EditorComponent from "./editor";
 import AsyncList from "./list";
+import EditorNavComponent from './editor-nav';
 import Backend from './backend';
 
 class WebanvilMain extends React.Component {
@@ -34,17 +35,38 @@ class WebanvilMain extends React.Component {
         return <a onClick={() => { this.onTemplateSelect(item) }}>{item}</a>
     }
 
+    onSave () {
+        if (this.state.currentTemplateName) {
+            this.backend.saveTemplate(
+                this.state.currentTemplateName, 
+                this.editorReference.current.getCode()
+            ).catch(e => console.error(e));
+        }
+    }
+
     render () {
-        return <>
-            <aside>
-                <AsyncList loadFunction={this.getTemplateList.bind(this)} itemDisplayFunction={this.getTemplateListItem.bind(this)}></AsyncList>
-            </aside>
-            <div>
-                <form>
-                    <EditorComponent ref={this.editorReference} code={this.state.currentTemplate}></EditorComponent>
-                </form>
+        return <div className="container-fluid">
+            <div className="row">
+                <div className="col-2">
+                    <AsyncList 
+                        loadFunction={this.getTemplateList.bind(this)} 
+                        itemDisplayFunction={this.getTemplateListItem.bind(this)}
+                        listClass="list-group"
+                        listItemClass='list-group-item list-group-item-action'
+                    ></AsyncList>
+                </div>
+                <div className="col-10">
+                    <EditorNavComponent 
+                        title={this.state.currentTemplateName || 'Template'}
+                        onSave={this.onSave.bind(this)}
+                    >
+                    </EditorNavComponent>
+                    <form>
+                        <EditorComponent ref={this.editorReference} code={this.state.currentTemplate}></EditorComponent>
+                    </form>
+                </div>
             </div>
-        </>
+        </div>
     }
 }
 

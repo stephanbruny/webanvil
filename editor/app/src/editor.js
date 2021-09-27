@@ -14,6 +14,10 @@ class EditorComponent extends React.Component {
         this.setState({ code })
     }
 
+    getCode () {
+        return this.state.code;
+    }
+
     render () {
         return (
             <CodeEditor

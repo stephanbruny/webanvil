@@ -6,6 +6,8 @@ class AsyncList extends React.Component {
     this.state = { data: [] };
     this.loadFunction = props.loadFunction;
     this.itemDisplayFunction = props.itemDisplayFunction;
+    this.listClass = props.listClass;
+    this.listItemClass = props.listItemClass;
   }
 
   componentDidMount() {
@@ -14,9 +16,9 @@ class AsyncList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul className={this.listClass}>
         {this.state.data.map((el) => (
-          <li key={el}>{this.itemDisplayFunction ? this.itemDisplayFunction(el) : el}</li>
+          <li key={el} className={this.listItemClass}>{this.itemDisplayFunction ? this.itemDisplayFunction(el) : el}</li>
         ))}
       </ul>
     );

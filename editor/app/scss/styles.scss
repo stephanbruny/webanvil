@@ -30,84 +30,85 @@ header {
     padding: 12px;
     font-size: 24px;
     text-shadow: 0px 1px 1px #000;
+    margin-bottom: 1em;
 }
 
-textarea, input {
-    color: #303030;
-    border-radius: 8px;
-}
+// textarea, input {
+//     color: #303030;
+//     border-radius: 8px;
+// }
 
-main {
-    display: flex;
-    flex-direction: row;
+// main {
+//     display: flex;
+//     flex-direction: row;
 
-    div {
-        flex: 1 1;
-        @include flexcol();
-    }
+//     div {
+//         flex: 1 1;
+//         @include flexcol();
+//     }
 
-    aside {
-        flex: 0 1 auto;
-        @include flexcol();
-        padding: 12px;
-    }
+//     aside {
+//         flex: 0 1 auto;
+//         @include flexcol();
+//         padding: 12px;
+//     }
 
-    input {
-        outline: none;
-        border: none;
-        background: #fff;
-        color: $background-color;
-        font: $font;
-        padding: 9px 12px;
-    }
+//     input {
+//         outline: none;
+//         border: none;
+//         background: #fff;
+//         color: $background-color;
+//         font: $font;
+//         padding: 9px 12px;
+//     }
 
-    form {
-        padding: 12px;
-        @include flexcol();
-    }
-}
+//     form {
+//         padding: 12px;
+//         @include flexcol();
+//     }
+// }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+// ul {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
 
-    li {
-        a {
-            color: #ffffff;
-            cursor: pointer;
+//     li {
+//         a {
+//             color: #ffffff;
+//             cursor: pointer;
 
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-}
+//             &:hover {
+//                 text-decoration: underline;
+//             }
+//         }
+//     }
+// }
 
-button {
-    outline: none;
-    border: 1px solid #fff;
-    background-color: transparent;
-    color: #fff;
-    padding: 8px 16px;
-    cursor: pointer;
+// button {
+//     outline: none;
+//     border: 1px solid #fff;
+//     background-color: transparent;
+//     color: #fff;
+//     padding: 8px 16px;
+//     cursor: pointer;
 
-    &:hover {
-        text-decoration: underline;
-    }
-}
+//     &:hover {
+//         text-decoration: underline;
+//     }
+// }
 
-// classes
+// // classes
 
-.inline {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
+// .inline {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: flex-start;
+// }
 
-// 3rd party
+// // 3rd party
 
-.w-tc-editor {
-    color: #303030;
-    border-radius: 8px;
-}
+// .w-tc-editor {
+//     color: #303030;
+//     border-radius: 8px;
+// }
