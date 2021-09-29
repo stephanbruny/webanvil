@@ -4,12 +4,13 @@ import EditorComponent from "./editor";
 import AsyncList from "./list";
 import EditorNavComponent from './editor-nav';
 import Backend from './backend';
+import TemplateSelector from "./components/template-selector";
 
 class WebanvilMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentTemplateName: null,
+            currentTemplateName: '',
             currentTemplate: null
         };
         this.backend = Backend();
@@ -44,25 +45,45 @@ class WebanvilMain extends React.Component {
         }
     }
 
+    onNew () {
+        this.setState({
+            currentTemplate: '',
+            currentTemplateName: ''
+        });
+        this.editorReference.current.setCode('');
+    }
+
+    onTemplateNameChange (ev) {
+        this.setState({
+            currentTemplateName: ev.target.value
+        })
+    }
+
     render () {
         return <div className="container-fluid">
             <div className="row">
                 <div className="col-2">
-                    <AsyncList 
-                        loadFunction={this.getTemplateList.bind(this)} 
-                        itemDisplayFunction={this.getTemplateListItem.bind(this)}
-                        listClass="list-group"
-                        listItemClass='list-group-item list-group-item-action'
-                    ></AsyncList>
+                    <TemplateSelector 
+                        backend={this.backend}
+                        onSelectTemplate={this.onTemplateSelect.bind(this)}
+                        currentTemplate={this.state.currentTemplateName}
+                    ></TemplateSelector>
                 </div>
                 <div className="col-10">
                     <EditorNavComponent 
-                        title={this.state.currentTemplateName || 'Template'}
+                        title={this.state.currentTemplateName}
                         onSave={this.onSave.bind(this)}
+                        onNew={this.onNew.bind(this)}
+                        onChange={this.onTemplateNameChange.bind(this)}
                     >
                     </EditorNavComponent>
-                    <form>
+                    <form className="container">
                         <EditorComponent ref={this.editorReference} code={this.state.currentTemplate}></EditorComponent>
+                        <div className="btn-group" role="group" aria-label="Basic example">
+                            <button onClick={() => this.onNew()} type="button" className="btn btn-outline-warning">New</button>
+                            <button type="button" className="btn btn-outline-primary">Save Partial</button>
+                            <button onClick={() => this.onSave()} type="button" className="btn btn-outline-success">Save Template</button>
+                        </div>
                     </form>
                 </div>
             </div>

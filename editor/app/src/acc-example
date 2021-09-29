@@ -1,0 +1,26 @@
+{
+    "/home": {
+        "target": "localhost:8300/html/home",
+        "acc": {
+            "title": { "static": "Homepage" },
+            "content": {
+                "source": "localhost:8300/html/home-content"
+            }
+        }
+    }
+}
+
+title = get from "http://localhost:8005/homepage-title"
+
+(route "/home" (
+    (var title (get "http://localhost:8005/homepage-title"))
+    (var content (get "http://localhost:8300/home-content"))
+    (var footer (post "http://..." (get "http://localhost.../footer-content")))
+    (post "http://localhost:8300/html/home" (json
+        {
+            title,
+            content,
+            footer
+        }
+    ))
+))

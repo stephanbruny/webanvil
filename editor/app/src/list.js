@@ -14,11 +14,17 @@ class AsyncList extends React.Component {
     this.loadFunction().then((json) => this.setState({ data: json }));
   }
 
+  getListItemClass (el) {
+    const classes = [this.listItemClass];
+    if (el == this.props.current) classes.push('active');
+    return classes.join(' ');
+  }
+
   render() {
     return (
       <ul className={this.listClass}>
         {this.state.data.map((el) => (
-          <li key={el} className={this.listItemClass}>{this.itemDisplayFunction ? this.itemDisplayFunction(el) : el}</li>
+          <li key={el} className={this.getListItemClass(el)}>{this.itemDisplayFunction ? this.itemDisplayFunction(el) : el}</li>
         ))}
       </ul>
     );

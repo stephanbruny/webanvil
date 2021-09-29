@@ -10,6 +10,7 @@ class EditorNavComponent extends React.Component {
       this.state = { title: props.title };
       this.onSave = props.onSave;
       this.onNew = props.onNew;
+      this.onChange = props.onChange;
     }
 
     onSaveClick () {
@@ -24,12 +25,10 @@ class EditorNavComponent extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">{this.props.title}</a>
+                <input className="form-control" type="text" value={this.props.title} onChange={this.props.onChange} placeholder="Template"></input>
                 <form className="d-flex">
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <button onClick={() => this.onNewClick()} type="button" className="btn btn-outline-primary">New</button>
-                        <button type="button" className="btn btn-outline-primary">Middle</button>
-                        <button onClick={() => this.onSaveClick()} type="button" className="btn btn-outline-primary">Save</button>
                     </div>
                 </form>
             </div>
