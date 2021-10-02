@@ -16,11 +16,14 @@ export default function (host = "localhost:8300") {
         });
 
     const saveTemplate = (name, content) => postJson(`api/html/${name}`, content);
+    const savePartial = (name, content) => postJson(`api/partial/${name}`, content);
 
     return {
         listTemplates,
         listPartials,
         getTemplate: (name) => getText(`api/html/${name}`),
-        saveTemplate
+        getPartial: (name) => getText(`api/partial/${name}`),
+        saveTemplate,
+        savePartial
     };
 }

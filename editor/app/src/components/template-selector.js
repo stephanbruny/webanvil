@@ -58,6 +58,10 @@ class TemplateSelector extends React.Component {
     componentDidMount() {
         this.getTemplateList().then((json) => {
             this.setState({ templates: json })
+        }).then(() => this.getPartialList())
+        .then((json) => {
+            console.log(json)
+            this.setState({ partials: json })
         });
     }
 
@@ -69,6 +73,21 @@ class TemplateSelector extends React.Component {
             });
             return false;
         }).bind(this);
+    }
+
+    getListAccordion (title, list, expanded, toggleFn) {
+        return <div className="accordion">
+            <div className="accordion-item">
+                <h2 class="accordion-header">
+                <button class={`accordion-button ${!expanded && 'collapsed'}`} type="button" onClick={toggleFn} aria-expanded={expanded} aria-controls="collapseOne">
+                    {title}
+                </button>
+                </h2>
+            </div>
+            <div className="list-group accordion-item">
+                {list}
+            </div>
+        </div>
     }
 
     render () {
@@ -87,18 +106,8 @@ class TemplateSelector extends React.Component {
             this.state.partialListExpanded
         );
         return <>
-            <div className="list-group">
-                <div className="list-group-item list-group-item-action" onClick={toggleTemplateList}>
-                    Templates
-                    {templateList}
-                </div>
-            </div>
-            <div className="list-group">
-                <div className="list-group-item list-group-item-action" onClick={togglePartialList}>
-                    Partials
-                    {partialList}
-                </div>
-            </div>
+            {this.getListAccordion('Templates', templateList, this.state.templateListExpanded, toggleTemplateList)}
+            {this.getListAccordion('Partials', partialList, this.state.partialListExpanded, togglePartialList)}
         </>
     }
 }
