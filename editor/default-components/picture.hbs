@@ -1,0 +1,6 @@
+<picture>
+  <source srcset="/content{{formats.large.url}}" type="{{formats.large.mime}}" media="(min-width: 1280px)">
+  <source srcset="/content{{formats.medium.url}}" type="{{formats.medium.mime}}" media="(min-width: 1024px)">
+  <source srcset="/content{{formats.small.url}}" type="{{formats.small.mime}}" media="(min-width: 768px)">
+  <img src="/content{{formats.small.url}}" class="img-fluid {{class}}" alt="{{alternativeText}}">
+</picture>

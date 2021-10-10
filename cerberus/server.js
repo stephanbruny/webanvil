@@ -4,14 +4,16 @@ const axios = require('axios');
 const contentService = 'http://localhost:1337';
 const renderService = 'http://localhost:8300';
 
+const request = require('./req');
+
 const renderUrl = (path) => `${renderService}/${path}`;
 const contentUrl = (path, sep = '/') => `${contentService}${sep}${path}`;
 
 
 const getJson = async url => {
     try {
-        const res = await axios.get(url);
-        return res.data;
+        const { body } = await request.get(url);
+        return body.json();
     } catch (ex) {
         console.error("Error (getJson)", url, ex.message);
     }
@@ -20,8 +22,9 @@ const getJson = async url => {
 const getContentJson = path => getJson(contentUrl(path));
 
 const render = async (path, data = {}) => {
-    const res = await axios.post(renderUrl(path), data);
-    return res.data;
+    // const res = await axios.post(renderUrl(path), data);
+    const res = await request.post(renderUrl(path), data);
+    return res.body;
 }
 
 const content = {
@@ -34,7 +37,7 @@ const content = {
 
 const routes = {
     '/': {
-        render: 'html/Main',
+        render: 'html/home',
         data: {
             homepage: 'homepage',
             cateogories: 'categories'
@@ -46,7 +49,8 @@ const initializeRoutes = async (server) => {
     server.get('/', async (req, rep) => {
         const homepage = await content.homepage();
         const categories = await content.categories();
-        const result = await render('html/Main', {
+        console.log(homepage, categories)
+        const result = await render('html/home', {
             homepage,
             categories
         })
@@ -57,7 +61,7 @@ const initializeRoutes = async (server) => {
         const res = await axios.get(contentUrl(req.params['*']), {
             responseType: 'arraybuffer'
         });
-        rep.type(res.headers['content-type']).send(res.data)
+        rep.headers(res.headers).type(res.headers['content-type']).send(res.data)
     })
 }
 
